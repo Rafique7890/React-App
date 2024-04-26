@@ -32,12 +32,14 @@ export const signup = async (req, res) => {
         if  (newUser) {
             generateTokenAndSetCookie (newUser._id, res);
             await newUser.save();
+
             res.status(201).json({
             _id : newUser._id,
             fullName: newUser.fullName,
             userName: newUser.userName,
             profilePic: newUser.profilePic,
         });
+        
         } else {
             res.status(500).json({error: "invalid user data"});
         }
